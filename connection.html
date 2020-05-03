@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <style media="screen">
+      body{
+        text-align: center;
+        padding:3%;
+        background-color: #eed426;
+        font-family: verdana
+      }
+      h1{
+        color: #006666;
+      }
+      form{
+        padding: 3%;
+      }
+      p{
+        margin: 0 15%;
+        display: inline;
+
+      }
+      input{
+        margin: 0 15%;
+        height: 5%;
+        width: 15%;
+      }
+      input[type="radio"]{
+        height: 15px;
+        width: 15px;
+        margin:0;
+      }
+      #scheme1{
+        margin-left: 14%;
+      }
+      label[for="scheme3"]{
+        margin-right: 15%
+      }
+      select{
+          margin: 0 15%;
+          margin-right: 29%;
+      }
+      button{
+        margin: 0 15%;
+      }
+      table{
+        margin-left: 38%;
+        border-style: solid;
+        border-width: 1px;
+      }
+      th,td{
+        border-style: solid;
+        border-width: 1px;
+      }
+    </style>
+      <h1>ACTB Connection Portal</h1>
+      <form class="" action="" method="">
+        <p for="custname">Customer Name:</p>
+        <input type="text" name="custname" placeholder="Enter the customer name" value="">
+        <br>
+        <br>
+        <p for="email">Customer Email:</p>
+        <input type="email" name="email" placeholder="abc@gmail.com" value="">
+        <br>
+        <br>
+        <p for="mobile">Mobile number:</p>
+        <input type="tel" name="mobile" placeholder="Enter the mobile number" pattern="[7-9]{1}[0-9]{9}" value="">
+        <br>
+        <br>
+        <p for="conntype">Type of Broadband:</p>
+        <select id="connectiontype"class="" name="conntype">
+          <option id="Pre" value="Pre">Pre</option>
+          <option id="Post" value="Post">Post</option>
+        </select>
+        <br>
+        <br>
+        <p>Scheme Name:</p>
+        <input type="radio" name="scheme"  id="scheme1" value="local">
+        <label for="scheme1">Local</label>
+        <input type="radio" name="scheme"  id="scheme2" value="std">
+        <label for="scheme2">STD</label>
+        <input type="radio" name="scheme"  id="scheme3" value="FullTalkTime">
+        <label for="scheme3">FullTalkTime</label>
+        <br>
+        <br>
+        <p>Connection Duration</p>
+        <input id="connectionDuration" type="number" name="mobile" max="12" min="1" >
+        <br>
+        <br>
+        <button onclick="formSubmit()" type="button" name="button">Calculate Bill Amount</button>
+        <button type="reset" name="button">reset</button>
+      </form>
+      <div id="result">
+
+      </div>
+      <h3>Rental cost table</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Connectiontype</th>
+            <th>Call Limit</th>
+            <th>Monthly Rental</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Pre</td>
+            <td>500</td>
+            <td>75</td>
+          </tr>
+          <tr>
+            <td>Post</td>
+            <td>Unlimited</td>
+            <td>150</td>
+          </tr>
+        </tbody>
+      </table>
+      <script type="text/javascript">
+        let costPerMonth={
+          "local":200,
+          "std":300,
+          "FullTalkTime":500
+        }
+        let rentalCost={
+          "Pre":75,
+          "Post":150
+        }
+      let radioValue;
+      let duration;
+      let monthly;
+      let result = document.getElementById("result");
+      let para=document.createElement('p');
+      result.appendChild(para);
+      function formSubmit(){
+        para.innerHTML=" ";
+        let ele=document.getElementsByName("scheme")
+        for(i = 0; i < ele.length; i++) {
+                  if(ele[i].checked)
+                  radioValue=ele[i].value;
+              }
+        duration=document.getElementById("connectionDuration").value;
+        monthly=document.getElementById("connectiontype").value;
+        para.innerHTML=`Total Monthly Rental Cost is Rs ${(duration*costPerMonth[radioValue])+rentalCost[monthly]}`
+        }
+
+      </script>
+  </body>
+</html>
